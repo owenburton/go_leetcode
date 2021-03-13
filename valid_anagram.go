@@ -11,6 +11,10 @@ import "fmt"
 // else, return false
 
 func isAnagram(s string, t string) bool {
+	if len(s) != len(t) {
+		return false
+	}
+
 	sBytes := make(map[byte]int)
 	tBytes := make(map[byte]int)
 
@@ -20,9 +24,7 @@ func isAnagram(s string, t string) bool {
 		} else {
 			sBytes[s[i]] = 1
 		}
-	}
 
-	for i := 0; i < len(t); i++ {
 		if _, ok := tBytes[t[i]]; ok {
 			tBytes[t[i]]++
 		} else {
@@ -36,12 +38,6 @@ func isAnagram(s string, t string) bool {
 		if ok == false || v1 != v2 {
 			return false
 		}
-
-		delete(tBytes, k)
-	}
-
-	if len(tBytes) != 0 {
-		return false
 	}
 
 	return true
