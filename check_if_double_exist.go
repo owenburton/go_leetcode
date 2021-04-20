@@ -9,16 +9,15 @@ import "fmt"
 // If so, return true. Else, false.
 
 func checkIfExist(arr []int) bool {
-	var cache = map[int]int{}
+	m := make(map[int]int)
 	for i, v := range arr {
-		cache[v] = i
-	}
-	for i, v := range arr {
-		if idx, ok := cache[v*2]; ok {
-			if i!=idx {
-				return true
-			} 
+		if _, ok := m[v*2]; ok {
+			return true
 		}
+		if _, ok := m[v/2]; ok && v%2==0 {
+			return true
+		}
+		m[v] = i
 	}
 	return false
 }
